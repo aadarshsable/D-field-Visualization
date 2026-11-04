@@ -57,7 +57,7 @@ The Fourier transform of a Gaussian is again a Gaussian:
 
 The real space obversational window width $`\sigma`$ becomes a Fourier space width $`1/\sigma`$, and $`\mathcal{F}[G](0) = 1`$ because $`G`$ is normalised.
 
-The $`k_{j_0}`$ radian phase shift in step 1 is a $`k_{j_0}`$ translation in Fourier space, $`\mathcal{F}[\psi_{j_0}](\mathbf{q}) = \hat\varphi(\mathbf{k}_{j_0} + \mathbf{q})`$, so
+The $`k_{j_0}`$ radian phase shift in step 1 is a $`k_{j_0}`$ translation in Fourier space, $`\mathcal{F}[\psi_{j_0}](\mathbf{q}) = \hat\varphi(\mathbf{k}_{j_0}+\mathbf{q})`$, so
 
 ```math
 {\;\hat\eta_{j_0}(\mathbf{q}) = \hat\varphi(\mathbf{k}_{j_0}+\mathbf{q})\; e^{-\sigma^2|\mathbf{q}|^2/2}\;}
@@ -124,7 +124,7 @@ D_j = \frac{\partial(\eta_{j,R},\eta_{j,I})}{\partial(x,y)} = \partial_x\eta_{j,
 ```math
 \rho_{{top}_j}(\mathbf{r}) = D_j\,\delta^{(2)}(\eta_j) = \sum_a q_a\,\delta^{(2)}(\mathbf{r}-\mathbf{r}_a)
 ```
-with $`s_a = \operatorname{sign} D_j(\mathbf{r}_a) = \pm 1`$ at each zero $`\mathbf{r}_a`$ of $`\eta_j`$.
+with $`s_a = \text{sign} D_j(\mathbf{r}_a) = \pm 1`$ at each zero $`\mathbf{r}_a`$ of $`\eta_j`$.
 
 This gives us a space that is zero everywhere but blows up to infinity at the exact point of the topological defects.
 
