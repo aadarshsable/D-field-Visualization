@@ -23,18 +23,18 @@ Let us fix a wave vector $\mathbf{k}_{j_0}$.
 
 **Step 1:** We multiply the field $\varphi(\mathbf{x})$ by the conjugate carrier to isolate fast oscillating components
 
-$$
+```math
 \psi_{j_0}(\mathbf{x}) = \varphi(\mathbf{x})\, e^{-i\mathbf{k}_{j_0}\cdot\mathbf{x}}
 = \eta_{j_0} + \eta_{j_0}^*\, e^{-2i\mathbf{k}_{j_0}\cdot\mathbf{x}}
-+ \sum_{j\neq j_0}\Big[\eta_j\, e^{i(\mathbf{k}_j-\mathbf{k}_{j_0})\cdot\mathbf{x}} + \eta_j^*\, e^{-i(\mathbf{k}_j+\mathbf{k}_{j_0})\cdot\mathbf{x}}\Big].
-$$
++ \sum_{j\neq j_0}\Big[\eta_j\, e^{i(\mathbf{k}_j-\mathbf{k}_{j_0})\cdot\mathbf{x}} + \eta_j^*\, e^{-i(\mathbf{k}_j+\mathbf{k}_{j_0})\cdot\mathbf{x}}\Big]
+```
 
 Only $\eta_{j_0}$ is left without a fast oscillation.
 
 **Step 2:** We convolve with the normalised 2D Gaussian ($G(\mathbf{r})$) to eliminate the fast oscillating component
 
 $$
-G(\mathbf{r}) = \frac{1}{2\pi\sigma^2}\exp\!\left(-\frac{|\mathbf{r}|^2}{2\sigma^2}\right)
+G(\mathbf{r}) = \frac{1}{2\pi\sigma^2}\exp\left(-\frac{|\mathbf{r}|^2}{2\sigma^2}\right)
 $$
 
 then the amplitude is defined as
