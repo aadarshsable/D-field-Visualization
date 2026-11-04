@@ -4,16 +4,16 @@
 
 We generate a real, periodic field on an $L\times L$ grid:
 
-$$
+```math
 \varphi(\mathbf{x}) = \frac{1}{L^2}\sum_{\mathbf{k}} \hat\varphi(\mathbf{k})\, e^{i\mathbf{k}\cdot\mathbf{x}},
 \qquad \hat\varphi(\mathbf{k}) = \nu\,F_h(\mathbf{k}),\qquad \hat\varphi(-\mathbf{k}) = \hat\varphi(\mathbf{k})^*,
-$$
+```
 
 where $F_h$ is `F_hermitian` and $\mathbf{k} = 2\pi\mathbf{n}/L$. The amplitude picture on the slides writes the same field as
 
-$$
+```math
 \varphi(\mathbf{x}) = \sum_j \Big[\eta_j(\mathbf{x})\, e^{i\mathbf{k}_j\cdot\mathbf{x}} + \eta_j^*(\mathbf{x})\, e^{-i\mathbf{k}_j\cdot\mathbf{x}}\Big],
-$$
+```
 
 with slowly varying complex amplitudes $\eta_j$. The goal is to extract $\eta_j$ for a chosen $\mathbf{k}_j$.
 
@@ -33,42 +33,42 @@ Only $\eta_{j_0}$ is left without a fast oscillation.
 
 **Step 2:** We convolve with the normalised 2D Gaussian ($G(\mathbf{r})$) to eliminate the fast oscillating component
 
-$$
+```math
 G(\mathbf{r}) = \frac{1}{2\pi\sigma^2}\exp\left(-\frac{|\mathbf{r}|^2}{2\sigma^2}\right)
-$$
+```
 
 then the amplitude is defined as
 
-$$
+```math
 \eta_{j_0}(\mathbf{x}) = (\psi_{j_0} * G)(\mathbf{x})
-$$
+```
 
 **Step 3:** We then fourier transform $\eta_{j_0}$ to convert the convolution to multiplication,
 
-$$
+```math
 \mathcal{F}[\eta_{j_0}](\mathbf{q}) = \mathcal{F}[\psi_{j_0}](\mathbf{q})\cdot \mathcal{F}[G](\mathbf{q})
-$$
+```
 
 The Fourier transform of a Gaussian is again a Gaussian:
 
-$$
+```math
 \mathcal{F}[G](\mathbf{q}) = \int G(\mathbf{r})\, e^{-i\mathbf{q}\cdot\mathbf{r}}\, d^2r = \exp\!\left(-\frac{\sigma^2 |\mathbf{q}|^2}{2}\right)
-$$
+```
 
 The real space obversational window width $\sigma$ becomes a Fourier space width $1/\sigma$, and $\mathcal{F}[G](0) = 1$ because $G$ is normalised.
 
 The $k_{j_0}$ radian phase shift in step 1 is a $k_{j_0}$ translation in Fourier space, $\mathcal{F}[\psi_{j_0}](\mathbf{q}) = \hat\varphi(\mathbf{k}_{j_0} + \mathbf{q})$, so
 
-$$
+```math
 {\;\hat\eta_{j_0}(\mathbf{q}) = \hat\varphi(\mathbf{k}_{j_0}+\mathbf{q})\; e^{-\sigma^2|\mathbf{q}|^2/2}\;}
-$$
+```
 
 **Step 4:** We now inverse fourier transform $\hat\eta_{j_0}$ to get $\eta_{j_0}$
 
-$$
+```math
 \eta_{j_0}(\mathbf{x}) = \mathcal{F}^{-1}\Big\{\mathcal{F}\big[\varphi\, e^{-i\mathbf{k}_{j_0}\cdot\mathbf{x}}\big]\cdot e^{-\sigma^2|\mathbf{q}|^2/2}\Big\}
 = \frac{1}{L^2}\sum_{\mathbf{q}} \hat\varphi(\mathbf{k}_{j_0}+\mathbf{q})\, e^{-\sigma^2|\mathbf{q}|^2/2}\, e^{i\mathbf{q}\cdot\mathbf{x}}
-$$
+```
 
 where $L$ is the grid size of our physical field $\varphi(\mathbf{x})$
 
@@ -79,33 +79,33 @@ So $\eta_{j_0}$ is the summation of the Fourier transforms of $\varphi$ within r
 
 Now, we want to take two perpendicular wave vectors ($k_1$ and $k_2$) and demodulate the field $\varphi$ along these. Take
 
-$$
+```math
 \mathbf{k}_1 = k_0(\cos\theta_0,\ \sin\theta_0), \qquad
 \mathbf{k}_2 = k_0(-\sin\theta_0,\ \cos\theta_0)
-$$
+```
 
 where we can take $\theta_0$ = 0, so $\mathbf{k}_1$ lies along the remaining spectrum (in the fourier space) and $\mathbf{k}_2$ is perpendicular to it. And, $k_0$ is taken as the weighted mean radius of the spectral band. In our case, we get it as
 
-$$
+```math
 k_0 = \frac{\sum_{\mathbf{k}} |\mathbf{k}|\,\hat\psi(|\mathbf{k}|)}{\sum_{\mathbf{k}} \hat\psi(|\mathbf{k}|)} \approx 1.029 \ \text{rad/px},
-$$
+```
 
 which is the centre of the band.
 
 $k_1$ and $k_2$ are then snapped to the FFT grid, since FFT requres our $L \times L$ grid/field to be periodic, so we need a whole number of wavelength cycles in the grid. 
 
-$$
+```math
 L = n \cdot \frac{2\pi}{k}
-$$
+```
 
 where $n$ is a (whole) number or waves in the grid and our target wave vector $k = k_0$. In our case we get $n=335.4$, and snapping the waves to the grid gives us $n=335$.
 
 We can now compute each $\eta_j$ independently though demodulation of the same field $\varphi$:
 
-$$
+```math
 \eta_1 = \mathcal{F}^{-1}\!\big\{\mathcal{F}[\varphi e^{-i\mathbf{k}_1\cdot\mathbf{x}}]\,\mathcal{F}[G]\big\},\qquad
 \eta_2 = \mathcal{F}^{-1}\!\big\{\mathcal{F}[\varphi e^{-i\mathbf{k}_2\cdot\mathbf{x}}]\,\mathcal{F}[G]\big\}.
-$$
+```
 
 ## 4. D-field computation from the Halperin-Mazenko method
 
@@ -115,15 +115,15 @@ A topological defect occurs when $\eta = 0$, i.e. $\eta_R = \eta_I = 0$. So theo
 
 Since we do not have a neat mathematical function for this coordinate transformation, we look at the Jacobian determinant of this transformation:
 
-$$
+```math
 D_j = \frac{\partial(\eta_{j,R},\eta_{j,I})}{\partial(x,y)} = \partial_x\eta_{j,R}\,\partial_y\eta_{j,I} - \partial_x\eta_{j,I}\,\partial_y\eta_{j,R}
-$$
+```
 
 **Singular defect density:**
 
-$$
+```math
 \rho_{{top}_j}(\mathbf{r}) = D_j\,\delta^{(2)}(\eta_j) = \sum_a q_a\,\delta^{(2)}(\mathbf{r}-\mathbf{r}_a)
-$$
+```
 with $s_a = \operatorname{sign} D_j(\mathbf{r}_a) = \pm 1$ at each zero $\mathbf{r}_a$ of $\eta_j$.
 
 This gives us a space that is zero everywhere but blows up to infinity at the exact point of the topological defects.
@@ -132,7 +132,9 @@ Since we can't plot this we "smear" this infinite spike by normalizing the funct
 
 **Non-singular defect density:**
 
- $$\rho_j = D_j / (\pi\eta_0^2)$$
+ ```math
+ \rho_j = D_j / (\pi\eta_0^2)
+ ```
  
  For plotting we use this quantity. I set $\eta_0^2 = \tfrac12\big(\langle|\eta_1|^2\rangle + \langle|\eta_2|^2\rangle\big)$ per row, so $D_1$ and $D_2$ have a common normalizing factor.
 
