@@ -90,6 +90,10 @@ CONFIGS = [
     ("Mild Anisotropy", np.pi / 2),
     ("Moderate Anisotropy", np.pi / 4),
     ("Strong Anisotropy", np.pi / 16),
+    ("Strong Anisotropy", np.pi / 32),
+    ("Strong Anisotropy", np.pi / 64),
+    ("Complete Anisotropy", np.pi / 128),
+    ("Complete Anisotropy", np.pi / 256),
 ]
 
 
