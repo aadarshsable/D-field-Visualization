@@ -36,11 +36,11 @@ for i, (label, w) in enumerate(widths):
     axs[i, 0].set_title(f"{label}: $D_1/\\pi\\Psi_0^2$")
     axs[i, 0].axis("off")
 
-    # rho_top: D1 * exp(-|eta1|^2 / eps^2)
-    eps = 0.25 * psi0
-    rho_norm = D1 * np.exp(-np.abs(eta1)**2 / eps**2) / (np.pi * eps**2)
-    vloc = np.percentile(np.abs(rho_norm), 99.9)
-    axs[i, 1].imshow(rho_norm, cmap="RdBu_r", vmin=-vloc, vmax=vloc, origin="lower")
+    # rho_top: D1 * Gaussian approximation of 2D dirac delta function
+    eps = 0.2 * psi0
+    rho_top = D1 * np.exp(-np.abs(eta1)**2 / (2 * eps**2)) / (2 * np.pi * eps**2)
+    vloc = np.percentile(np.abs(rho_top), 99.9)
+    axs[i, 1].imshow(rho_top, cmap="RdBu_r", vmin=-vloc, vmax=vloc, origin="lower")
     axs[i, 1].set_title(f"{label}: $D_1 \\cdot \\delta_\\epsilon(\\eta_1)$")
     axs[i, 1].axis("off")
 
